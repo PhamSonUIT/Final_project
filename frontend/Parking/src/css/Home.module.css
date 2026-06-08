@@ -1,0 +1,416 @@
+.page {
+    min-height: 100vh;
+    background: #f3f6fb;
+    font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    color: #1f2937;
+    padding-top: 80px; /* 🌟 ĐÃ THÊM: Đệm khoảng trống phía trên để nội dung không bị che khuất bởi Navbar fixed */
+}
+
+/* =========================================================================
+   📦 PHÂN HỆ ĐỊNH DẠNG NAVBAR (FIXED + CHUYỂN ĐỘNG ẨN/HIỆN THÔNG MINH)
+   ========================================================================= */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 28px;
+    height: 75px; /* Ép cố định chiều cao thanh để tính toán hiệu ứng mượt hơn */
+    background: #ffffff;
+    border-bottom: 1px solid #e2e8f0;
+    box-shadow: 0 10px 30px rgba(15, 23, 42, 0.05);
+    position: fixed; /* 🌟 CHUYỂN ĐỔI: Sử dụng fixed thay vì sticky để phục vụ logic cuộn ẩn/hiện ẩn danh */
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
+}
+
+/* 🌟 CLASS CHỐT SỬ DỤNG TRÊN JS: Khóa dịch chuyển ẩn thanh khi cuộn xuống bãi xe */
+.navbarHidden {
+    transform: translateY(-100%);
+    opacity: 0;
+}
+
+.brand {
+    font-size: 1.35rem;
+    font-weight: 800;
+    letter-spacing: 0.04em;
+    color: #111827;
+}
+
+.brandLink {
+    display: inline-block;
+    color: inherit;
+    text-decoration: none;
+    transition: transform 0.15s ease, color 0.15s ease;
+}
+
+.brandLink:hover {
+    color: #2563eb;
+    transform: translateY(-1px);
+}
+
+/* KHỐI TABS CONTAINER ĐIỀU HƯỚNG */
+.navItems {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+}
+
+.navLink,
+.navLinkHighlight {
+    text-decoration: none;
+    color: #334155;
+    font-weight: 600;
+    padding: 10px 18px;
+    border-radius: 9999px;
+    transition: background-color 0.2s ease, color 0.2s ease;
+    position: relative;
+}
+
+.navLink:hover {
+    background: #e2e8f0;
+}
+
+/* 🌟 ĐÃ THÊM: ĐỔI MÀU XANH LÁ CHO TAB ĐANG HOẠT ĐỘNG (ACTIVE LINK) */
+.navLinkActive {
+    color: #22c55e !important; /* Mã màu xanh lá chuẩn hệ sinh thái Smart Parking */
+    background: #f0fdf4 !important; /* Tạo nền xanh lá nhạt nhẹ bao bọc sang trọng */
+}
+
+.navLinkHighlight {
+    color: #be123c;
+    background: #fee2e2;
+}
+
+.navLinkHighlight:hover {
+    background: #fecaca;
+}
+
+/* AUTH ACTIONS GIAO DIỆN DESKTOP */
+.desktopAuthActions {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.mobileAuthActions {
+    display: none; /* Ẩn phân hệ auth di động ở chế độ màn hình lớn */
+}
+
+/* CÁC THÀNH PHẦN BADGE & BUTTON NGUYÊN BẢN */
+.button {
+    border: none;
+    border-radius: 9999px;
+    padding: 11px 22px;
+    font-size: 0.95rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: transform 0.15s ease, background-color 0.15s ease;
+}
+
+.button:hover {
+    transform: translateY(-1px);
+}
+
+.primaryButton {
+    background: #2563eb;
+    color: white;
+}
+
+.outlineButton {
+    background: transparent;
+    color: #2563eb;
+    border: 1px solid #2563eb;
+}
+
+.dangerButton {
+    background: #dc2626;
+    color: white;
+}
+
+.userBadge {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: 600;
+    color: #334155;
+}
+
+.roleBadge {
+    background: #64748b;
+    color: white;
+    border-radius: 9999px;
+    padding: 5px 10px;
+    font-size: 0.8rem;
+    font-weight: 700;
+}
+
+/* =========================================================================
+   🍔 PHÂN HỆ TẠO ĐỒNG BỘ NÚT mobileNav MENU (ẨN TRÊN PC)
+   ========================================================================= */
+.mobileNav {
+    display: none;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 24px;
+    height: 18px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    z-index: 1100;
+}
+
+.bar {
+    width: 100%;
+    height: 3px;
+    background-color: #111827;
+    border-radius: 9999px;
+    transition: all 0.3s ease;
+}
+
+/* =========================================================================
+   🖥️ KHU VỰC CORE LAYOUT (GIỮ NGUYÊN CẤU TRÚC ĐỒ ÁN)
+   ========================================================================= */
+.mainContent {
+    max-width: 1180px;
+    margin: 32px auto 48px;
+    padding: 0 24px;
+}
+
+.cameraSection {
+    background: #ffffff;
+    margin: 24px auto;
+    border-radius: 24px;
+    padding: 28px;
+    box-shadow: 0 24px 60px rgba(15, 23, 42, 0.08);
+    border: 1px solid #e2e8f0;
+    max-width: 1180px;
+}
+
+.sectionTitle {
+    margin-bottom: 22px;
+    font-size: 1.45rem;
+    font-weight: 800;
+    color: #111827;
+}
+
+.slotsSection {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(240px, 1fr));
+    gap: 24px;
+    margin-bottom: 32px;
+}
+
+.card {
+    background: #ffffff;
+    border-radius: 24px;
+    padding: 24px;
+    border: 1px solid #e2e8f0;
+    box-shadow: 0 18px 40px rgba(15, 23, 42, 0.06);
+}
+
+.successCard {
+    border-color: #22c55e;
+}
+
+.primaryCard {
+    border-color: #2563eb;
+}
+
+.cardLabel {
+    margin-bottom: 14px;
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: #475569;
+}
+
+.cardValue {
+    display: inline-block;
+    font-size: 2.8rem;
+    font-weight: 800;
+    color: #0f766e;
+}
+
+.infoSection {
+    display: grid;
+    gap: 24px;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+}
+
+.infoCard {
+    background: #ffffff;
+    border-radius: 24px;
+    padding: 28px;
+    border: 1px solid #e2e8f0;
+    box-shadow: 0 18px 40px rgba(15, 23, 42, 0.06);
+}
+
+.formCard {
+    background: #f8fafc;
+}
+
+.cardTitle {
+    margin-bottom: 18px;
+    font-size: 1.25rem;
+    font-weight: 800;
+    color: #111827;
+}
+
+.priceList {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    line-height: 2;
+    color: #334155;
+}
+
+.formGroup {
+    margin-bottom: 20px;
+}
+
+.label {
+    display: block;
+    margin-bottom: 10px;
+    font-weight: 700;
+    color: #334155;
+}
+
+.input,
+.select {
+    width: 100%;
+    padding: 14px 16px;
+    border-radius: 16px;
+    border: 1px solid #cbd5e1;
+    background: #ffffff;
+    font-size: 1rem;
+    color: #0f172a;
+}
+
+.input:focus,
+.select:focus {
+    outline: none;
+    border-color: #2563eb;
+    box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.14);
+}
+
+.summaryText {
+    margin-top: 22px;
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: #dc2626;
+    text-align: center;
+}
+
+
+@media (max-width: 1024px) {
+    .mobileNav {
+        display: flex; 
+    }
+
+    .desktopAuthActions {
+        display: none; /* Gỡ bỏ khối đăng nhập hàng ngang tránh tràn màn hình */
+    }
+
+    /* 🌟 BIẾN ĐỔI: Bo tròn toàn bộ khối Tabs cũ thành một ngăn kéo Drawer vuốt từ hông bên phải */
+    .navItems {
+        position: fixed;
+        top: 75px;
+        right: -100%;
+        bottom: 0;
+        width: 300px;
+        background: #ffffff;
+        border-left: 1px solid #e2e8f0;
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 30px 24px;
+        gap: 16px;
+        box-shadow: -10px 0 40px rgba(15, 23, 42, 0.06);
+        transition: right 0.3s ease-in-out;
+        overflow-y: auto;
+    }
+
+    /* Kéo ngăn kéo Drawer lộ diện mượt mà ra màn hình */
+    .navItemsOpen {
+        right: 0;
+    }
+
+    .navLink,
+    .navLinkHighlight {
+        width: 100%;
+        text-align: left;
+        border-radius: 14px;
+        padding: 12px 16px;
+    }
+
+    .mobileOnlyNavLink {
+        display: block;
+        width: 100%;
+    }
+
+    .mobileAuthActions {
+        display: block;
+        width: 100%;
+        margin-top: 20px;
+        border-top: 1px solid #e2e8f0;
+        padding-top: 24px;
+    }
+
+    .userBadgeMobile {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+        margin-bottom: 16px;
+        font-weight: 600;
+        color: #334155;
+    }
+
+    .mobileAuthButtons {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+    }
+
+    .button {
+        width: 100%;
+        text-align: center;
+    }
+
+    /* LAYOUT BẾN BÃI RESPONSIVE CHUYỂN DỊCH SANG 1 CỘT ĐỂ KHÔNG BỊ BÓP HÌNH CAM */
+    .slotsSection,
+    .infoSection {
+        grid-template-columns: 1fr;
+    }
+
+    /* HIỆU ỨNG BIẾN ĐỔI NÚT 3 GẠCH THÀNH DẤU X KHI ĐANG MỞ MENU */
+    .mobileNavActive .bar:nth-child(1) {
+        transform: translateY(7.5px) rotate(45deg);
+    }
+    .mobileNavActive .bar:nth-child(2) {
+        opacity: 0;
+    }
+    .mobileNavActive .bar:nth-child(3) {
+        transform: translateY(-7.5px) rotate(-45deg);
+    }
+}
+
+@media (max-width: 620px) {
+    .mainContent {
+        padding: 0 16px;
+        margin-top: 16px;
+    }
+
+    .cameraSection,
+    .infoCard,
+    .card {
+        padding: 20px;
+        border-radius: 20px;
+    }
+
+    .cardValue {
+        font-size: 2.3rem;
+    }
+}

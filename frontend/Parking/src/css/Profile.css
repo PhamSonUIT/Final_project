@@ -1,0 +1,212 @@
+.profile-layout-container {
+    display: flex;
+    max-width: 1300px;
+    margin: 30px auto;
+    gap: 25px;
+    padding: 0 15px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* SIDEBAR TRÁI */
+.profile-left-sidebar {
+    flex: 1;
+    background: #ffffff;
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+    max-height: 85vh;
+    overflow-y: auto;
+}
+
+.sidebar-user-header {
+    text-align: center;
+    border-bottom: 2px dashed #f1f2f6;
+    padding-bottom: 15px;
+    margin-bottom: 20px;
+}
+
+.role-tag {
+    background: #3498db;
+    color: white;
+    padding: 3px 10px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.vehicle-plates-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 12px;
+    margin-top: 15px;
+}
+
+.plate-item-card {
+    display: flex;
+    align-items: center;
+    padding: 12px 15px;
+    background: #f8f9fa;
+    border: 2px solid #e2e8f0;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.plate-item-card:hover {
+    border-color: #3498db;
+    background: #f1f9ff;
+}
+
+.active-plate {
+    border-color: #2ecc71 !important;
+    background: #ebfef2 !important;
+    font-weight: bold;
+}
+
+/* FORM ĐĂNG KÝ VỚI OTP */
+.add-vehicle-otp-box {
+    background: #f1f2f6;
+    padding: 15px;
+    border-radius: 8px;
+    margin-top: 25px;
+}
+
+.form-mini-group {
+    margin-bottom: 10px;
+}
+
+.form-mini-group label {
+    display: block;
+    font-size: 12px;
+    font-weight: 600;
+    margin-bottom: 4px;
+}
+
+.form-mini-group input,
+.form-mini-group select {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+.otp-req-btn,
+.otp-submit-btn {
+    width: 100%;
+    padding: 10px;
+    background: #2c3e50;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.otp-req-btn:hover {
+    background: #1a252f;
+}
+
+.otp-submit-btn {
+    background: #27ae60;
+}
+
+.profile-right-content {
+    flex: 2.5;
+    background: #ffffff;
+    border-radius: 12px;
+    padding: 25px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+}
+
+.selected-plate-banner {
+    background: #34495e;
+    color: white;
+    padding: 15px;
+    border-radius: 8px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.history-tabs-nav {
+    display: flex;
+    border-bottom: 2px solid #dee2e6;
+    margin-bottom: 20px;
+}
+
+.tab-link {
+    padding: 12px 20px;
+    background: none;
+    border: none;
+    font-weight: 600;
+    color: #6c757d;
+    cursor: pointer;
+}
+
+.tab-active {
+    color: #3498db;
+    border-bottom: 3px solid #3498db;
+}
+
+.custom-history-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.custom-history-table th,
+.custom-history-table td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #dee2e6;
+}
+
+.custom-history-table th {
+    background: #f8f9fa;
+}
+
+.status-pill {
+    padding: 3px 8px;
+    font-size: 11px;
+    border-radius: 10px;
+    font-weight: bold;
+}
+
+.status-pill.active {
+    background: #e3fef0;
+    color: #27ae60;
+}
+
+.in-garage-tag {
+    color: #e67e22;
+    font-weight: bold;
+    font-style: italic;
+}
+
+.empty-history-alert {
+    text-align: center;
+    color: #95a5a6;
+    padding: 40px 0;
+}
+
+.save-basic-info-btn {
+    width: 100%;
+    padding: 10px;
+    background: #3498db;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 10px;
+    transition: background 0.2s ease;
+}
+
+.save-basic-info-btn:hover {
+    background: #2980b9;
+}
+
+.profile-basic-form .form-mini-group {
+    margin-bottom: 12px;
+}

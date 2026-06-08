@@ -1,0 +1,241 @@
+/* --- HỆ THỐNG CSS THUẦN CHO CAMERA COMPONENT --- */
+.camera-container {
+  padding: 10px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.camera-main-layout {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  flex-wrap: wrap;
+}
+
+.camera-box {
+  position: relative;
+  border: 5px solid #2c3e50;
+  border-radius: 15px;
+  overflow: hidden;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+.camera-webcam {
+  display: block;
+  width: 100%;
+  max-width: 540px;
+}
+
+.camera-control-panel {
+  width: 320px;
+  padding: 20px;
+  background-color: white;
+  border-radius: 15px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.camera-control-panel h5 {
+  font-weight: bold;
+  color: #6c757d;
+  margin: 0 0 10px 0;
+}
+
+.camera-plate-display {
+  font-size: 42px;
+  font-weight: bold;
+  letter-spacing: 2px;
+  color: #1a1a1a;
+  background-color: #e9ecef;
+  padding: 12px;
+  border-radius: 10px;
+  margin: 15px 0 25px 0;
+  border: 2px dashed #6c757d;
+}
+
+.camera-confirm-btn {
+  width: 100%;
+  padding: 16px 0;
+  color: white;
+  font-weight: bold;
+  font-size: 16px;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.3s ease;
+}
+
+.camera-status-note {
+  margin-top: 20px;
+  text-align: left;
+  border: 1px solid #dee2e6;
+  border-radius: 8px;
+  padding: 16px;
+}
+
+.camera-status-note p {
+  margin: 4px 0 0 0;
+  font-size: 14px;
+  color: #6c757d;
+}
+
+/* Khu vực kết quả đối chiếu ảnh lịch sử */
+.camera-result-section {
+  background-color: white;
+  border: none;
+  border-radius: 16px;
+  padding: 24px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  margin: 40px auto 0 auto;
+  max-width: 950px;
+}
+
+.camera-result-flex {
+  display: flex;
+  justify-content: center;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+
+.camera-image-card {
+  background-color: #f8f9fa;
+  padding: 15px;
+  border-radius: 12px;
+  text-align: center;
+  border: 1px solid #dee2e6;
+}
+
+.camera-image-card h5 {
+  font-weight: bold;
+  margin: 0 0 16px 0;
+}
+
+.camera-text-success {
+  color: #27ae60;
+}
+
+.camera-text-danger {
+  color: #c0392b;
+}
+
+.camera-image-card p {
+  margin: 8px 0 0 0;
+  color: #6c757d;
+  font-size: 14px;
+}
+
+.camera-history-img {
+  width: 260px;
+  height: auto;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  object-fit: cover;
+}
+
+/* Khối hóa đơn thanh toán */
+.camera-payment-card {
+  background-color: #2c3e50;
+  color: white;
+  min-width: 280px;
+  padding: 24px;
+  border-radius: 16px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+}
+
+.camera-payment-card h4 {
+  color: #f1c40f;
+  font-weight: bold;
+  margin: 0 0 8px 0;
+}
+
+.camera-payment-card p {
+  margin: 0 0 4px 0;
+  color: #f8f9fa;
+}
+
+.camera-payment-card .camera-text-note {
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.5);
+  margin-bottom: 16px;
+}
+
+.camera-price-text {
+  color: #f1c40f;
+  font-size: 36px;
+  font-weight: bold;
+  margin: 0 0 24px 0;
+}
+
+.camera-close-btn {
+  width: 100%;
+  background-color: #e74c3c;
+  color: white;
+  font-weight: bold;
+  padding: 12px 0;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.2s;
+}
+
+.camera-close-btn:hover {
+  background-color: #c0392b;
+}
+
+@media (max-width: 860px) {
+  .camera-main-layout {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .camera-control-panel {
+    width: 100%;
+    max-width: 620px;
+  }
+
+  .camera-plate-display {
+    font-size: 32px;
+  }
+
+  .camera-result-flex {
+    flex-direction: column;
+  }
+
+  .camera-image-card,
+  .camera-payment-card {
+    width: 100%;
+  }
+
+  .camera-history-img {
+    width: 100%;
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 620px) {
+  .camera-control-panel {
+    padding: 16px;
+  }
+
+  .camera-plate-display {
+    font-size: 26px;
+    padding: 10px;
+  }
+
+  .camera-payment-card {
+    padding: 18px;
+  }
+
+  .camera-confirm-btn,
+  .camera-close-btn {
+    padding: 14px 0;
+  }
+}

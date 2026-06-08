@@ -1,0 +1,224 @@
+/* --- HỆ THỐNG CSS THUẦN CHO TRANG VÉ THÁNG --- */
+.ticket-container {
+  max-width: 500px;
+  margin: 50px auto 0 auto;
+  padding: 0 15px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Nút quay lại trang chủ */
+.back-btn {
+  background: none;
+  border: none;
+  color: #2ea44f;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 500;
+  padding: 0;
+  margin-bottom: 20px;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  transition: color 0.2s;
+}
+
+.back-btn:hover {
+  color: #227d3b;
+}
+
+/* Khung Card chính */
+.ticket-card {
+  background-color: #ffffff;
+  border-radius: 16px;
+  padding: 30px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+  border: 1px solid #eaeaea;
+}
+
+.ticket-header {
+  text-center: center;
+  margin-bottom: 25px;
+}
+
+.ticket-header h2 {
+  color: #2ea44f;
+  font-weight: 700;
+  margin: 0 0 8px 0;
+  font-size: 24px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* Cấu trúc Form nhóm */
+.form-group {
+  margin-bottom: 20px;
+  text-align: left;
+}
+
+.form-group label {
+  display: block;
+  font-weight: 600;
+  color: #4a4a4a;
+  margin-bottom: 8px;
+  font-size: 14px;
+}
+
+/* Các ô Input và Select Box đồng bộ */
+.form-input,
+.form-select {
+  width: 100%;
+  padding: 12px;
+  border: 2px solid #e0e0e0;
+  border-radius: 8px;
+  font-size: 16px;
+  box-sizing: border-box;
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.form-input:focus,
+.form-select:focus {
+  border-color: #2ea44f;
+  box-shadow: 0 0 0 3px rgba(46, 164, 79, 0.15);
+}
+
+/* Riêng ô nhập biển số và số tháng cho hiển thị to rõ */
+.input-highlight {
+  text-align: center;
+  font-weight: 700;
+  font-size: 20px;
+  letter-spacing: 1px;
+  color: #1a1a1a;
+  background-color: #f9f9f9;
+}
+
+/* Nút bấm xác nhận thanh toán */
+.submit-btn {
+  width: 100%;
+  background-color: #2ea44f;
+  color: #ffffff;
+  border: none;
+  padding: 14px;
+  font-size: 16px;
+  font-weight: 700;
+  border-radius: 8px;
+  cursor: pointer;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  box-shadow: 0 4px 12px rgba(46, 164, 79, 0.2);
+  transition: background-color 0.2s, transform 0.1s, box-shadow 0.2s;
+  margin-top: 10px;
+}
+
+.payment-panel {
+  border-radius: 14px;
+  border: 1px solid #d1fae5;
+  background: #f0fdf4;
+  padding: 18px;
+  margin-bottom: 20px;
+}
+
+.payment-panel h3 {
+  margin: 0 0 12px;
+  font-size: 18px;
+  color: #166534;
+}
+
+.payment-summary {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 0;
+  border-top: 1px solid #d1fae5;
+  border-bottom: 1px solid #d1fae5;
+  margin: 12px 0;
+}
+
+.payment-amount {
+  color: #14532d;
+  font-size: 18px;
+}
+
+.payment-status {
+  color: #166534;
+  font-size: 14px;
+  margin: 0;
+}
+
+.payment-link {
+  display: inline-block;
+  margin-top: 10px;
+  color: #0f766e;
+  text-decoration: none;
+  font-weight: 700;
+}
+
+.payment-link:hover {
+  text-decoration: underline;
+}
+
+.submit-btn:hover:not(:disabled) {
+  background-color: #227d3b;
+  box-shadow: 0 4px 15px rgba(34, 125, 59, 0.3);
+}
+
+.submit-btn:active:not(:disabled) {
+  transform: scale(0.98);
+}
+
+.submit-btn:disabled {
+  background-color: #a5d6a7;
+  color: #ffffff;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+@media (max-width: 760px) {
+  .ticket-container {
+    margin: 24px auto 0 auto;
+    padding: 0 16px;
+  }
+
+  .ticket-card {
+    padding: 22px;
+  }
+
+  .ticket-header h2 {
+    font-size: 22px;
+  }
+
+  .payment-summary {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 10px;
+  }
+
+  .payment-summary>* {
+    width: 100%;
+  }
+
+  .submit-btn {
+    padding: 14px;
+  }
+}
+
+@media (max-width: 520px) {
+  .ticket-card {
+    padding: 18px;
+  }
+
+  .form-group {
+    margin-bottom: 16px;
+  }
+
+  .form-input,
+  .form-select {
+    font-size: 15px;
+    padding: 12px;
+  }
+
+  .payment-panel {
+    padding: 16px;
+  }
+}
