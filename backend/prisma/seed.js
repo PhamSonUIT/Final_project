@@ -2,7 +2,7 @@ import { PrismaClient } from "@prisma/client";
 import bcrypt from "bcrypt";
 const prisma = new PrismaClient();
 
-const pas = "12345";
+const pass = "12345";
 const hashPass = bcrypt.hashSync(pass, 10);
 async function main() {
   const adminRole = await prisma.roles.create({ data: { role_name: "Admin" } });
