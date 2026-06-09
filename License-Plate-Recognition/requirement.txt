@@ -10,4 +10,5 @@ requests
 pandas
 seaborn
 easyocr
+eventlet
 python-socketio
