@@ -9,3 +9,4 @@ pyyaml
 requests
 pandas
 seaborn
+easyocr
