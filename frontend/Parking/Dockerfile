@@ -18,4 +18,4 @@ COPY --from=builder /app/build ./build
 
 EXPOSE 3001
 
-CMD ["serve", "-s", "dist", "-l", "3001"]
+CMD ["serve", "-s", "build", "-l", "3001"]
