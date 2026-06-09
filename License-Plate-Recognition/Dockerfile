@@ -4,16 +4,18 @@ WORKDIR /app
 
 RUN apt-get update && apt-get install -y \
     build-essential \
-    libglib2.0-0 \
+    ffmpeg \
     libsm6 \
-    libxrender1 \
     libxext6 \
+    libxrender-dev \
+    libglib2.0-0 \
+    libgl1-mesa-glx \
+    libgomp1 \
     && rm -rf /var/lib/apt/lists/*
 
 COPY requirement.txt .
-RUN pip install --no-cache-dir -r requirement.txt
 
-RUN python -c "import easyocr; reader = easyocr.Reader(['en'])"
+RUN pip install --no-cache-dir -r requirement.txt
 
 COPY . .
 
