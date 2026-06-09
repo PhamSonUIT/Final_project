@@ -25,35 +25,38 @@ export default function PriceSettings() {
     setSaving(true);
     setStatusMessage("");
 
-    const newConfig = {
-      bikeHourly: Number(bikeHourly),
-      carHourly: Number(carHourly),
-      bikeMonthly: Number(bikeMonthly),
-      carMonthly: Number(carMonthly),
-    };
-
-    localStorage.setItem("priceBikeHourly", newConfig.bikeHourly);
-    localStorage.setItem("priceCarHourly", newConfig.carHourly);
-    localStorage.setItem("priceBikeMonthly", newConfig.bikeMonthly);
-    localStorage.setItem("priceCarMonthly", newConfig.carMonthly);
-
     try {
-      if (token) {
-        await axios.post(
-          "https://phamson.xyz/api/admin/update-pricing",
-          newConfig,
-          {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          },
-        );
-      }
-      setStatusMessage("Cập nhật giá thành công.");
-    } catch (err) {
-      setStatusMessage(
-        "Cập nhật giá lưu cục bộ. Backend không hỗ trợ endpoint hoặc chưa chạy.",
+      await axios.put(
+        "https://phamson.xyz/api/parking/update-price",
+        {
+          id: 1,
+          base_price: parseFloat(bikeHourly),
+          overtime_price: parseFloat(bikeHourly * 0.5),
+          monthly_price: parseFloat(bikeMonthly)
+        },
+        { headers: { Authorization: `Bearer ${token}` } }
       );
+
+      await axios.put(
+        "https://phamson.xyz/api/parking/update-price",
+        {
+          id: 2,
+          base_price: parseFloat(carHourly),
+          overtime_price: parseFloat(carHourly * 0.5),
+          monthly_price: parseFloat(carMonthly)
+        },
+        { headers: { Authorization: `Bearer ${token}` } }
+      );
+
+      localStorage.setItem("priceBikeHourly", bikeHourly);
+      localStorage.setItem("priceCarHourly", carHourly);
+      localStorage.setItem("priceBikeMonthly", bikeMonthly);
+      localStorage.setItem("priceCarMonthly", carMonthly);
+
+      setStatusMessage("Cập nhật bảng giá thành công!");
+    } catch (err) {
+      console.error(err);
+      setStatusMessage("Lỗi hệ thống, không thể lưu giá mới.");
     } finally {
       setSaving(false);
     }
