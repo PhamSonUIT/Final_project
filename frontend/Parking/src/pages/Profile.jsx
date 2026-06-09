@@ -46,7 +46,7 @@ export default function Profile() {
             `[PAYOS REDIRECT] Trạng thái đơn hàng nhận diện: ${status}`,
           );
           await axios.get(
-            `http://68.183.102.106:3000/api/users/payos-webhook?status=${status}&orderCode=${orderCode}`,
+            `http://134.209.210.226:3000/api/users/payos-webhook?status=${status}&orderCode=${orderCode}`,
             { headers: { Authorization: `Bearer ${token}` } },
           );
           navigate("/profile", { replace: true });
@@ -57,7 +57,7 @@ export default function Profile() {
 
       try {
         const res = await axios.get(
-          "http://68.183.102.106:3000/api/users/profile",
+          "http://134.209.210.226:3000/api/users/profile",
           {
             headers: { Authorization: `Bearer ${token}` },
           },
@@ -97,13 +97,13 @@ export default function Profile() {
 
     try {
       await axios.put(
-        "http://68.183.102.106:3000/api/users/update-profile",
+        "http://134.209.210.226:3000/api/users/update-profile",
         { full_name: fullName, email, phone },
         { headers: { Authorization: `Bearer ${token}` } },
       );
       setMessage("🎉 Cập nhật thông tin cá nhân thành công!");
       const resProfile = await axios.get(
-        "http://68.183.102.106:3000/api/users/profile",
+        "http://134.209.210.226:3000/api/users/profile",
         {
           headers: { Authorization: `Bearer ${token}` },
         },
@@ -129,7 +129,7 @@ export default function Profile() {
 
       // Gọi API tạo cổng thanh toán mới từ Backend
       const paymentResponse = await axios.post(
-        "http://68.183.102.106:3000/api/users/payos-checkout",
+        "http://134.209.210.226:3000/api/users/payos-checkout",
         { amount: amountToPay, description },
         { headers: { Authorization: `Bearer ${token}` } },
       );
@@ -160,7 +160,7 @@ export default function Profile() {
     setLoadingOtp(true);
     try {
       const response = await axios.post(
-        "http://68.183.102.106:3000/api/parking/send-history-otp",
+        "http://134.209.210.226:3000/api/parking/send-history-otp",
         { plate: newPlate },
         { headers: { Authorization: `Bearer ${token}` } },
       );
@@ -186,7 +186,7 @@ export default function Profile() {
     setSaving(true);
     try {
       const response = await axios.post(
-        "http://68.183.102.106:3000/api/parking/get-history",
+        "http://134.209.210.226:3000/api/parking/get-history",
         { plate: newPlate, otp: otpCode },
         { headers: { Authorization: `Bearer ${token}` } },
       );
@@ -197,7 +197,7 @@ export default function Profile() {
       setOtpSent(false);
 
       const res = await axios.get(
-        "http://68.183.102.106:3000/api/users/profile",
+        "http://134.209.210.226:3000/api/users/profile",
         {
           headers: { Authorization: `Bearer ${token}` },
         },

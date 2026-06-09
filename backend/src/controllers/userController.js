@@ -208,12 +208,10 @@ export const handlePayOSCallback = async (req, res) => {
         console.log(
           `[HỆ THỐNG] Đã XÓA bản ghi Pending rác (ID: ${pendingTicket.id}) do người dùng hủy đơn.`,
         );
-        return res
-          .status(200)
-          .json({
-            success: true,
-            message: "🗑️ Đã hủy đăng ký và xóa dữ liệu chờ thành công.",
-          });
+        return res.status(200).json({
+          success: true,
+          message: "🗑️ Đã hủy đăng ký và xóa dữ liệu chờ thành công.",
+        });
       }
       return res
         .status(200)
@@ -249,12 +247,10 @@ export const handlePayOSCallback = async (req, res) => {
         console.log(
           `Kích hoạt thành công trạng thái ACTIVE cho vé ID: ${pendingTicket.id}`,
         );
-        return res
-          .status(200)
-          .json({
-            success: true,
-            message: "Vé tháng đã được kích hoạt thành công!",
-          });
+        return res.status(200).json({
+          success: true,
+          message: "Vé tháng đã được kích hoạt thành công!",
+        });
       }
     }
 
@@ -276,8 +272,8 @@ export const createPayOSCheckout = async (req, res) => {
       return res.status(400).json({ message: "Số tiền không hợp lệ!" });
     }
     const orderCode = Math.floor(Math.random() * 900000) + 100000;
-    const returnUrl = `http://68.183.102.106:3001/profile?status=success&orderCode=${orderCode}`;
-    const cancelUrl = `http://68.183.102.106:3001/profile?status=cancel&orderCode=${orderCode}`;
+    const returnUrl = `http://134.209.210.226:3001/profile?status=success&orderCode=${orderCode}`;
+    const cancelUrl = `http://134.209.210.226:3001/profile?status=cancel&orderCode=${orderCode}`;
 
     const cleanDescription = (description || "Thanh toan ve thang")
       .normalize("NFD")

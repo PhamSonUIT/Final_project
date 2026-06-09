@@ -5,7 +5,7 @@ import axios from "axios";
 import "../css/Camera.css";
 
 // Kết nối đến AI Service (Python) để lấy biển số xe real-time
-const pythonSocket = io("http://68.183.102.106:5005", {
+const pythonSocket = io("http://134.209.210.226:5005", {
   transports: ["websocket"],
 });
 
@@ -81,7 +81,7 @@ export default function CameraComponent(props) {
     const fetchType = async () => {
       try {
         const res = await axios.post(
-          "http://68.183.102.106:3000/api/parking/detect-type",
+          "http://134.209.210.226:3000/api/parking/detect-type",
           { plate: detectedPlate },
           { headers: { Authorization: `Bearer ${token}` } },
         );
@@ -134,7 +134,7 @@ export default function CameraComponent(props) {
       }
 
       const res = await axios.post(
-        "http://68.183.102.106:3000/api/parking/check-parking",
+        "http://134.209.210.226:3000/api/parking/check-parking",
         payload,
         { headers: { Authorization: `Bearer ${token}` } },
       );

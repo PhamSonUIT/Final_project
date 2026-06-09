@@ -15,7 +15,7 @@ export default function SignIn() {
 
     try {
       const res = await axios.post(
-        "http://68.183.102.106:3000/api/auth/signin",
+        "http://134.209.210.226:3000/api/auth/signin",
         {
           email,
           password,

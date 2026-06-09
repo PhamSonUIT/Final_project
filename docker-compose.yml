@@ -14,6 +14,22 @@ services:
       - /data/mysql:/var/lib/mysql
     networks:
       - parking_network
+version: "3.8"
+
+services:
+  mysql_db:
+    image: mysql:8.0
+    container_name: smart_parking_db
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: "PhamSon180803"
+      MYSQL_DATABASE: smart_parking
+    ports:
+      - "3306:3306"
+    volumes:
+      - /data/mysql:/var/lib/mysql
+    networks:
+      - parking_network
     healthcheck:
       test:
         [
@@ -21,11 +37,62 @@ services:
           "mysqladmin",
           "ping",
           "-h",
-          "68.183.102.106",
+          "134.209.210.226",
           "-u",
           "root",
-          "-#PhamSon180803",
+          "-PhamSon180803",
         ]
+      timeout: 5s
+      retries: 5
+      start_period: 10s
+
+  ai_service:
+    build:
+      context: ./License-Plate-Recognition
+      dockerfile: Dockerfile
+    container_name: smart_parking_ai
+    restart: always
+    ports:
+      - "5005:5005"
+    networks:
+      - parking_network
+
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: smart_parking_backend
+    restart: always
+    ports:
+      - "3000:3000"
+    environment:
+      - PORT=3000
+      - DATABASE_URL=mysql://root:PhamSon180803@mysql_db:3306/smart_parking
+      - JWT_SECRET=parking
+    depends_on:
+      mysql_db:
+        condition: service_healthy
+    networks:
+      - parking_network
+
+  frontend:
+    build:
+      context: ./frontend/parking
+      dockerfile: Dockerfile
+    container_name: smart_parking_frontend
+    restart: always
+    ports:
+      - "3001:3001"
+    depends_on:
+      - backend
+      - ai_service
+    networks:
+      - parking_network
+
+networks:
+  parking_network:
+    driver: bridge
+
       timeout: 5s
       retries: 5
       start_period: 10s

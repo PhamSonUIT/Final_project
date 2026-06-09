@@ -23,7 +23,7 @@ export default function CreateAccount() {
     setLoading(true);
 
     try {
-      await axios.post("http://68.183.102.106:3000/api/auth/create-account", {
+      await axios.post("http://134.209.210.226:3000/api/auth/create-account", {
         ...formData,
         role_id: parseInt(formData.role_id),
       });

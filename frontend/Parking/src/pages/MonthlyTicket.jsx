@@ -27,7 +27,7 @@ export default function MonthlyTicket() {
       try {
         setPricesLoading(true);
         const response = await axios.post(
-          "http://68.183.102.106:3000/api/users/checkPrice",
+          "http://134.209.210.226:3000/api/users/checkPrice",
           { vehicleType: vehicleType, hours: 1 },
         );
         if (response.data.monthlyPrice) {
@@ -67,7 +67,7 @@ export default function MonthlyTicket() {
 
     try {
       await axios.post(
-        "http://68.183.102.106:3000/api/users/month-ticket",
+        "http://134.209.210.226:3000/api/users/month-ticket",
         {
           plateNumber: cleanPlate,
           vehicleType: vehicleType,
@@ -82,7 +82,7 @@ export default function MonthlyTicket() {
         const description = `Ve thang ${duration}T ${typeLabel} ${cleanPlate}`;
 
         const paymentResponse = await axios.post(
-          "http://68.183.102.106:3000/api/users/payos-checkout",
+          "http://134.209.210.226:3000/api/users/payos-checkout",
           { amount: totalPrice, description },
           { headers: { Authorization: `Bearer ${token}` } },
         );

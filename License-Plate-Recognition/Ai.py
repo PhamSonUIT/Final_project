@@ -62,5 +62,5 @@ def handle_image(sid, data):
         print(f" Lỗi xử lý frame: {e}")
 
 if __name__ == '__main__':
-    print("68.183.102.106:5000")
+    print("134.209.210.226:5000")
 eventlet.wsgi.server(eventlet.listen(('0.0.0.0', 5005)), app)

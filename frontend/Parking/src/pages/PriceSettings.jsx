@@ -40,7 +40,7 @@ export default function PriceSettings() {
     try {
       if (token) {
         await axios.post(
-          "http://68.183.102.106:3000/api/admin/update-pricing",
+          "http://134.209.210.226:3000/api/admin/update-pricing",
           newConfig,
           {
             headers: {

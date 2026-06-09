@@ -24,7 +24,7 @@ export default function Home() {
     const fetchCurrentSlots = async () => {
       try {
         const res = await axios.get(
-          "http://68.183.102.106:3000/api/parking/slots",
+          "http://134.209.210.226:3000/api/parking/slots",
         );
 
         setBikeCount(res.data.availableBikes);
@@ -57,7 +57,7 @@ export default function Home() {
       const paymentPayload = { ...pendingData, isPayOS: true };
       axios
         .post(
-          "http://68.183.102.106:3000/api/users/month-ticket",
+          "http://134.209.210.226:3000/api/users/month-ticket",
           paymentPayload,
           {
             headers: { Authorization: `Bearer ${token}` },
@@ -94,7 +94,7 @@ export default function Home() {
 
     try {
       const res = await axios.post(
-        "http://68.183.102.106:3000/api/users/checkPrice",
+        "http://134.209.210.226:3000/api/users/checkPrice",
         { vehicleType: vehicleType, hours: Number(hours) },
       );
       setTotal(res.data.estimatedPrice);
