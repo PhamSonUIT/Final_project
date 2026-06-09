@@ -20,7 +20,7 @@ export default function AdminDashboard() {
       setLoading(true);
       try {
         const headers = { Authorization: `Bearer ${token}` };
-        const baseApi = "http://134.209.210.226:3000/api/admin";
+        const baseApi = "https://phamson.xyz/api/admin";
 
         if (currentTab === "revenue") {
           const res = await axios.get(`${baseApi}/revenue/stats`, { headers });

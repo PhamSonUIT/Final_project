@@ -4,8 +4,7 @@ import { io } from "socket.io-client";
 import axios from "axios";
 import "../css/Camera.css";
 
-// Kết nối đến AI Service (Python) để lấy biển số xe real-time
-const pythonSocket = io("http://134.209.210.226:5005", {
+const pythonSocket = io("https://phamson.xyz", {
   transports: ["websocket"],
 });
 
@@ -18,13 +17,11 @@ export default function CameraComponent(props) {
   const [detectedType, setDetectedType] = useState(null);
   const [selectedType, setSelectedType] = useState("Auto");
 
-  // 🌟 KHẮC PHỤC ĐÓNG BĂNG STATE: Đồng bộ các dữ liệu camera mới nhất cho luồng tự động
   const currentDataRef = useRef({ detectedPlate, selectedType, detectedType });
   useEffect(() => {
     currentDataRef.current = { detectedPlate, selectedType, detectedType };
   }, [detectedPlate, selectedType, detectedType]);
 
-  // 1. Nhận biển số từ Python AI liên tục (3 frames/giây)
   useEffect(() => {
     pythonSocket.on("detection_result", (data) => {
       if (data.plate !== "Đang tìm...") {
@@ -43,7 +40,6 @@ export default function CameraComponent(props) {
     };
   }, []);
 
-  // 🌟 2. LUỒNG QUẸT THẺ TỰ ĐỘNG BẰNG ĐẦU ĐỌC USB RFID GÕ PHÍM KÈM ENTER
   useEffect(() => {
     let buffer = "";
     const handleKeyDown = (e) => {
@@ -68,7 +64,6 @@ export default function CameraComponent(props) {
     };
   }, []);
 
-  // Tự động nhận diện phân loại xe khi có biển số mới
   useEffect(() => {
     let mounted = true;
     const token = localStorage.getItem("token");
@@ -81,7 +76,7 @@ export default function CameraComponent(props) {
     const fetchType = async () => {
       try {
         const res = await axios.post(
-          "http://134.209.210.226:3000/api/parking/detect-type",
+          "https://phamson.xyz/api/parking/detect-type",
           { plate: detectedPlate },
           { headers: { Authorization: `Bearer ${token}` } },
         );
@@ -134,7 +129,7 @@ export default function CameraComponent(props) {
       }
 
       const res = await axios.post(
-        "http://134.209.210.226:3000/api/parking/check-parking",
+        "https://phamson.xyz/api/parking/check-parking",
         payload,
         { headers: { Authorization: `Bearer ${token}` } },
       );

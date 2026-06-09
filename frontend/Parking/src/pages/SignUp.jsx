@@ -22,7 +22,7 @@ export default function SignUp() {
     setLoading(true);
 
     try {
-      await axios.post("http://134.209.210.226:3000/api/auth/signup", {
+      await axios.post("https://phamson.xyz/api/auth/signup", {
         ...formData,
       });
 

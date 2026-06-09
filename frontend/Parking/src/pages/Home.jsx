@@ -23,9 +23,7 @@ export default function Home() {
   useEffect(() => {
     const fetchCurrentSlots = async () => {
       try {
-        const res = await axios.get(
-          "http://134.209.210.226:3000/api/parking/slots",
-        );
+        const res = await axios.get("https://phamson.xyz/api/parking/slots");
 
         setBikeCount(res.data.availableBikes);
         setCarCount(res.data.availableCars);
@@ -56,13 +54,9 @@ export default function Home() {
     if (status === "PAID" || status === "success" || code === "00") {
       const paymentPayload = { ...pendingData, isPayOS: true };
       axios
-        .post(
-          "http://134.209.210.226:3000/api/users/month-ticket",
-          paymentPayload,
-          {
-            headers: { Authorization: `Bearer ${token}` },
-          },
-        )
+        .post("https://phamson.xyz/api/users/month-ticket", paymentPayload, {
+          headers: { Authorization: `Bearer ${token}` },
+        })
         .then((res) => {
           alert(
             `Đăng ký Vé Tháng thành công sau khi thanh toán!\n` +
@@ -93,10 +87,10 @@ export default function Home() {
     }
 
     try {
-      const res = await axios.post(
-        "http://134.209.210.226:3000/api/users/checkPrice",
-        { vehicleType: vehicleType, hours: Number(hours) },
-      );
+      const res = await axios.post("https://phamson.xyz/api/users/checkPrice", {
+        vehicleType: vehicleType,
+        hours: Number(hours),
+      });
       setTotal(res.data.estimatedPrice);
     } catch (err) {
       const basePrice = vehicleType === "Car" ? 20000 : 5000;

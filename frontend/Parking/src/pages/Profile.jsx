@@ -46,7 +46,7 @@ export default function Profile() {
             `[PAYOS REDIRECT] Trạng thái đơn hàng nhận diện: ${status}`,
           );
           await axios.get(
-            `http://134.209.210.226:3000/api/users/payos-webhook?status=${status}&orderCode=${orderCode}`,
+            `https://phamson.xyz/api/users/payos-webhook?status=${status}&orderCode=${orderCode}`,
             { headers: { Authorization: `Bearer ${token}` } },
           );
           navigate("/profile", { replace: true });
@@ -56,12 +56,9 @@ export default function Profile() {
       }
 
       try {
-        const res = await axios.get(
-          "http://134.209.210.226:3000/api/users/profile",
-          {
-            headers: { Authorization: `Bearer ${token}` },
-          },
-        );
+        const res = await axios.get("https://phamson.xyz/api/users/profile", {
+          headers: { Authorization: `Bearer ${token}` },
+        });
         setFullName(res.data.full_name || "");
         setEmail(res.data.email || "");
         setPhone(res.data.phone || "");
@@ -97,13 +94,13 @@ export default function Profile() {
 
     try {
       await axios.put(
-        "http://134.209.210.226:3000/api/users/update-profile",
+        "https://phamson.xyz/api/users/update-profile",
         { full_name: fullName, email, phone },
         { headers: { Authorization: `Bearer ${token}` } },
       );
       setMessage("🎉 Cập nhật thông tin cá nhân thành công!");
       const resProfile = await axios.get(
-        "http://134.209.210.226:3000/api/users/profile",
+        "https://phamson.xyz/api/users/profile",
         {
           headers: { Authorization: `Bearer ${token}` },
         },
@@ -129,7 +126,7 @@ export default function Profile() {
 
       // Gọi API tạo cổng thanh toán mới từ Backend
       const paymentResponse = await axios.post(
-        "http://134.209.210.226:3000/api/users/payos-checkout",
+        "https://phamson.xyz/api/users/payos-checkout",
         { amount: amountToPay, description },
         { headers: { Authorization: `Bearer ${token}` } },
       );
@@ -160,7 +157,7 @@ export default function Profile() {
     setLoadingOtp(true);
     try {
       const response = await axios.post(
-        "http://134.209.210.226:3000/api/parking/send-history-otp",
+        "https://phamson.xyz/api/parking/send-history-otp",
         { plate: newPlate },
         { headers: { Authorization: `Bearer ${token}` } },
       );
@@ -186,7 +183,7 @@ export default function Profile() {
     setSaving(true);
     try {
       const response = await axios.post(
-        "http://134.209.210.226:3000/api/parking/get-history",
+        "https://phamson.xyz/api/parking/get-history",
         { plate: newPlate, otp: otpCode },
         { headers: { Authorization: `Bearer ${token}` } },
       );
@@ -196,12 +193,9 @@ export default function Profile() {
       setOtpCode("");
       setOtpSent(false);
 
-      const res = await axios.get(
-        "http://134.209.210.226:3000/api/users/profile",
-        {
-          headers: { Authorization: `Bearer ${token}` },
-        },
-      );
+      const res = await axios.get("https://phamson.xyz/api/users/profile", {
+        headers: { Authorization: `Bearer ${token}` },
+      });
       setVehicles(res.data.vehicles || []);
       setTicketHistory(res.data.monthly_tickets || []);
       setParkingHistory(res.data.parking_history || []);

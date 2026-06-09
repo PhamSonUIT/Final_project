@@ -14,13 +14,10 @@ export default function SignIn() {
     setLoading(true);
 
     try {
-      const res = await axios.post(
-        "http://134.209.210.226:3000/api/auth/signin",
-        {
-          email,
-          password,
-        },
-      );
+      const res = await axios.post("https://phamson.xyz/api/auth/signin", {
+        email,
+        password,
+      });
 
       localStorage.setItem("token", res.data.token);
       localStorage.setItem("role", res.data.user.role);

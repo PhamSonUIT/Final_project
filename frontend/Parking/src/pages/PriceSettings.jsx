@@ -40,7 +40,7 @@ export default function PriceSettings() {
     try {
       if (token) {
         await axios.post(
-          "http://134.209.210.226:3000/api/admin/update-pricing",
+          "https://phamson.xyz/api/admin/update-pricing",
           newConfig,
           {
             headers: {
