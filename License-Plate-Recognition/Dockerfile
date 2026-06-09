@@ -17,7 +17,7 @@ COPY requirement.txt .
 
 RUN pip install --no-cache-dir -r requirement.txt
 
-RUN python -c "import cv2
+RUN python -c "import cv2"
 
 RUN python -c "import easyocr; reader = easyocr.Reader(['en'])
 
