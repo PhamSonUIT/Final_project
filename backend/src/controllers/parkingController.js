@@ -290,6 +290,28 @@ export const getVehicleHistory = async (req, res) => {
   }
 };
 
+export const updatePrice = async (req, res) => {
+  const { id, base_price, overtime_price, monthly_price } = req.body;
+
+  try {
+    const updatedType = await prisma.vehicle_types.update({
+      where: { id: Number(id) },
+      data: {
+        base_price: parseFloat(base_price),
+        overtime_price: parseFloat(overtime_price),
+        monthly_price: parseFloat(monthly_price),
+      },
+    });
+
+    return res.status(200).json({
+      message: "Cập nhật giá thành công!",
+      data: updatedType,
+    });
+  } catch (error) {
+    console.error("Lỗi tại updatePrice Controller:", error);
+    return res.status(500).json({ message: "Lỗi hệ thống không thể cập nhật giá." });
+  }
+};
 
 async function saveWebcamImage(image, cleanPlate) {
   if (!image) return "";

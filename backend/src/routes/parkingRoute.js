@@ -3,10 +3,11 @@ import {
   checkParking,
   detectVehicleType,
   getAvailableSlots,
-  sendHistoryOTP,    // 🌟 THÊM TRƯỜNG NÀY
-  getVehicleHistory, // 🌟 THÊM TRƯỜNG NÀY
+  sendHistoryOTP,   
+  getVehicleHistory,
+  updatePrice,      
 } from "../controllers/parkingController.js";
-import { verifyToken } from "../configs/authMiddleware.js"; // 🌟 IMPORT MIDDLEWARE AUTH CỦA SƠN
+import { verifyToken } from "../configs/authMiddleware.js"; 
 
 const parkingRoutes = express.Router();
 
@@ -15,5 +16,5 @@ parkingRoutes.post("/detect-type", detectVehicleType);
 parkingRoutes.get("/slots", getAvailableSlots);
 parkingRoutes.post("/send-history-otp", verifyToken, sendHistoryOTP);
 parkingRoutes.post("/get-history", verifyToken, getVehicleHistory);
-
+parkingRoutes.put("/update-price", verifyToken, updatePrice);
 export default parkingRoutes;
