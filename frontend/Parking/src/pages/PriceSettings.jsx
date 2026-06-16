@@ -7,9 +7,9 @@ export default function PriceSettings() {
   const userRole = localStorage.getItem("role");
 
   const [bikeHourly, setBikeHourly] = useState(5000);
-  const [bikeOvertime, setBilkeOvertime] = useState(2500);
+  const [bikeOvertime, setBikeOvertime] = useState(2500);
   const [carHourly, setCarHourly] = useState(20000);
-  const [carOvertime, setCarOvertime] = useState(10000);
+  const [carOvertime, setCarOverTime] = useState(10000);
   const [bikeMonthly, setBikeMonthly] = useState(100000);
   const [carMonthly, setCarMonthly] = useState(1000000);
   const [statusMessage, setStatusMessage] = useState("");
@@ -102,7 +102,8 @@ export default function PriceSettings() {
                 value={bikeHourly}
                 onChange={(e) => setBikeHourly(e.target.value)}
               />
-            </div>
+              </div>
+              </div>
             <div className="price-section">
             <h2>Giá giờ sau xe máy</h2>
             <div className="price-row">
@@ -112,6 +113,7 @@ export default function PriceSettings() {
                 value={bikeOvertime}
                 onChange={(e) => setBikeOvertime(e.target.value)}
               />
+              </div>
             <div className="price-row">
               <label>Ô tô (VNĐ):</label>
               <input
@@ -130,6 +132,7 @@ export default function PriceSettings() {
                 value={carOvertime}
                 onChange={(e) => setCarOverTime(e.target.value)}
               />
+            </div>
 
           <div className="price-section">
             <h2>Giá vé tháng</h2>
