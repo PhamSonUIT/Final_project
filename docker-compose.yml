@@ -53,7 +53,7 @@ services:
 
     environment:
       PORT: 3000
-      DATABASE_URL: mysql://root:123456@mysql_db:3306/smart_parking
+      DATABASE_URL: mysql://root:PhamSon180803@mysql_db:3306/smart_parking
       JWT_SECRET: parking
 
     depends_on:
