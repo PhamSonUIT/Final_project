@@ -13,6 +13,7 @@ export default function PriceSettings() {
   const [statusMessage, setStatusMessage] = useState("");
   const [saving, setSaving] = useState(false);
 
+  
   useEffect(() => {
     setBikeHourly(Number(localStorage.getItem("priceBikeHourly") || 5000));
     setCarHourly(Number(localStorage.getItem("priceCarHourly") || 20000));

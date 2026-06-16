@@ -309,7 +309,7 @@ export const updatePrice = async (req, res) => {
     });
   } catch (error) {
     console.error("Lỗi tại updatePrice Controller:", error);
-    return res.status(500).json({ message: "Lỗi hệ thống không thể cập nhật giá." });
+    return res.status(500).json({ message: "không thể cập nhật giá." });
   }
 };
 
