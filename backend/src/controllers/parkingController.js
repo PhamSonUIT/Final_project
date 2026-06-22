@@ -4,40 +4,53 @@ const prisma = new PrismaClient();
 
 const detectTypeFromPlateText = (plate) => {
   const cleanPlate = plate.replace(/[\s\.\-]/g, "").toUpperCase();
+  
   if (cleanPlate.length < 4) return "Motorbike";
 
   if (cleanPlate.length === 9) {
     const char3 = cleanPlate.charAt(2);
     const char4 = cleanPlate.charAt(3);
-    if (/[A-Z]/.test(char3) && /[0-9]/.test(char4)) return "Motorbike";
-    if (/[A-Z]/.test(char3) && /[A-Z]/.test(char4)) return "Motorbike";
+    
+    if (/[A-Z]/.test(char3) && (/[0-9]/.test(char4) || /[A-Z]/.test(char4))) {
+      return "Motorbike";
+    }
     return "Car";
   }
-  if (cleanPlate.length === 7) return "Car";
+
   if (cleanPlate.length === 8) {
     const char3 = cleanPlate.charAt(2);
     const char4 = cleanPlate.charAt(3);
-    if (/[A-Z]/.test(char3) && /[A-Z]/.test(char4)) return "Motorbike";
-    if (/[A-Z]/.test(char3) && /[0-9]/.test(char4)) {
-      const totalNumbers = cleanPlate.replace(/[^0-9]/g, "").length;
-      if (totalNumbers === 7) return "Car";
+    
+    const totalNumbers = cleanPlate.replace(/[^0-9]/g, "").length;
+
+    if (/[A-Z]/.test(char3) && /[0-9]/.test(char4) && totalNumbers === 7) {
       return "Motorbike";
     }
+    
+    return "Car";
   }
+
+  if (cleanPlate.length === 7) {
+    const char3 = cleanPlate.charAt(2);
+    const char4 = cleanPlate.charAt(3);
+    
+    if (/[A-Z]/.test(char3) && /[0-9]/.test(char4)) return "Car";
+    return "Motorbike";
+  }
+
   return "Motorbike";
 };
 
 export const checkParking = async (req, res) => {
   try {
     const { rfid_uid, plate, image, overrideVehicleTypeName } = req.body;
-    const processedBy = req.userId; // Bốc ra ID nhân viên trực chốt từ token xác thực
-
+    const processedBy = req.userId; 
     if (!rfid_uid)
       return res.status(400).json({ message: "⚠️ Thiếu mã thẻ RFID!" });
     if (!plate || plate === "---")
       return res
         .status(400)
-        .json({ message: "⚠️ Chưa bắt được biển số xe hiển thị!" });
+        .json({ message: "Chưa bắt được biển số xe hiển thị!" });
 
     const cleanPlate = plate.replace(/[\s\.\-]/g, "").toUpperCase();
     const cleanRfidUid = rfid_uid.trim().toUpperCase();
@@ -69,7 +82,7 @@ export const checkParking = async (req, res) => {
     if (cardInParkTx) {
       if (cardInParkTx.plate_number !== cleanPlate) {
         return res.status(400).json({
-          message: `⚠️ TỪ CHỐT GIAO DỊCH (GIAO LẬN THẺ): Thẻ này đang được sử dụng để gửi xe [${cardInParkTx.plate_number}] trong bãi. Không thể dùng chung thẻ này cho xe [${cleanPlate}]!`,
+          message: `Thẻ này đang được sử dụng`,
         });
       }
 
@@ -80,7 +93,7 @@ export const checkParking = async (req, res) => {
           .status(400)
           .json({
             message:
-              "⚠️ LỖI TRÙNG THẺ: Hệ thống vừa ghi nhận quẹt thẻ này, vui lòng đợi 5 giây!",
+              "LỖI TRÙNG THẺ: Hệ thống vừa ghi nhận quẹt thẻ này, vui lòng đợi 5 giây!",
           });
       }
 
@@ -116,7 +129,7 @@ export const checkParking = async (req, res) => {
 
       if (activeTicket) {
         parkingFee = 0;
-        chargeMessage = "🎉 Xe đăng ký Vé Tháng (Miễn phí lượt).";
+        chargeMessage = "Xe đăng ký Vé Tháng";
       } else if (typeConfig) {
         const basePrice = Number(typeConfig.base_price);
         const overtimePrice = Number(typeConfig.overtime_price);
@@ -164,7 +177,7 @@ export const checkParking = async (req, res) => {
 
     if (plateInParkTx) {
       return res.status(400).json({
-        message: `⚠️ TỪ CHỐI XE VÀO: Xe có biển số [${cleanPlate}] hiện đã được ghi nhận đang ở TRONG bãi (quẹt bằng một thẻ khác). Không thể cho xe này vào thêm một lần nữa!`,
+        message: `Xe đang ở TRONG bãi (quẹt bằng một thẻ khác).`,
       });
     }
 
