@@ -293,8 +293,16 @@ export const sendHistoryOTP = async (req, res) => {
 export const getVehicleHistory = async (req, res) => {
   try {
     const { plate, otp } = req.body;
-    const userId = req.userId;
+    const userId = req.userId; 
     const cleanPlate = plate.replace(/[\s\.\-]/g, "").toUpperCase();
+
+    const currentUser = await prisma.users.findUnique({
+      where: { id: userId }
+    });
+
+    if (!currentUser) {
+      return res.status(401).json({ message: "Phiên đăng nhập không hợp lệ." });
+    }
 
     const activeTicket = await prisma.monthly_tickets.findFirst({
       where: { plate_number: cleanPlate, status: "Active" },
@@ -304,7 +312,12 @@ export const getVehicleHistory = async (req, res) => {
     if (!activeTicket || !activeTicket.user) {
       return res
         .status(400)
-        .json({ message: "Không tìm thấy hồ sơ xe hợp lệ." });
+        .json({ message: "Không tìm thấy vé tháng hợp lệ cho xe này." });
+    }
+    if (currentUser.email.toLowerCase() !== activeTicket.user.email.toLowerCase()) {
+      return res.status(403).json({ 
+        message: "Thêm xe thất bại: Tài khoản của bạn không khớp với email của người đăng ký vé tháng!" 
+      });
     }
 
     const validOtp = await prisma.otp_verifications.findFirst({
@@ -328,9 +341,12 @@ export const getVehicleHistory = async (req, res) => {
 
     await prisma.otp_verifications.delete({ where: { id: validOtp.id } });
 
-    return res.status(200);
+    return res.status(200).json({ 
+      message: "Thêm số xe vào tài khoản thành công!" 
+    });
   } catch (error) {
-    return res.status(500);
+    console.error("Lỗi xác thực thêm xe:", error);
+    return res.status(500).json({ message: "Lỗi hệ thống thêm phương tiện." });
   }
 };
 
