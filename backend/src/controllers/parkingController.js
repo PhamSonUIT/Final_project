@@ -251,7 +251,16 @@ export const detectVehicleType = async (req, res) => {
 export const sendHistoryOTP = async (req, res) => {
   try {
     const { plate } = req.body;
+    const userId = req.userId; 
     const cleanPlate = plate.replace(/[\s\.\-]/g, "").toUpperCase();
+
+    const currentUser = await prisma.users.findUnique({
+      where: { id: userId }
+    });
+
+    if (!currentUser) {
+      return res.status(401).json({ message: "Phiên đăng nhập không hợp lệ." });
+    }
 
     const activeTicket = await prisma.monthly_tickets.findFirst({
       where: { plate_number: cleanPlate, status: "Active" },
@@ -260,13 +269,17 @@ export const sendHistoryOTP = async (req, res) => {
 
     if (!activeTicket || !activeTicket.user) {
       return res.status(403).json({
-        message:
-          "Phương tiện chưa đăng ký hệ thống hoặc chưa kích hoạt gói Vé Tháng ",
+        message: "Phương tiện chưa đăng ký hệ thống hoặc chưa kích hoạt gói Vé Tháng."
+      });
+    }
+
+    if (currentUser.email.toLowerCase() !== activeTicket.user.email.toLowerCase()) {
+      return res.status(403).json({
+        message: "Tài khoản của bạn không khớp với email của người đăng ký vé tháng cho xe này!"
       });
     }
 
     const targetEmail = activeTicket.user.email;
-
     const otpCode = Math.floor(100000 + Math.random() * 900000).toString();
     const expiresAt = new Date(Date.now() + 5 * 60 * 1000);
 
@@ -278,15 +291,14 @@ export const sendHistoryOTP = async (req, res) => {
       },
     });
 
-    console.log(` ${cleanPlate}, ${targetEmail}, ${otpCode}`);
+    console.log(`[OTP] Đã gửi OTP xác thực xe ${cleanPlate} về email chính chủ: ${targetEmail}`);
 
     return res.status(200).json({
       message: `Mã OTP đối soát tài khoản đã được gửi về hộp thư ẩn dạng: ***${targetEmail.substring(3)}`,
     });
   } catch (error) {
-    return res
-      .status(500)
-      .json({ message: "Lỗi hệ thống cấp OTP bổ sung xe." });
+    console.error("Lỗi hệ thống tại sendHistoryOTP:", error);
+    return res.status(500).json({ message: "Lỗi hệ thống cấp OTP bổ sung xe." });
   }
 };
 
