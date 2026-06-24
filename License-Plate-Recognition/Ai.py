@@ -1,3 +1,12 @@
+import sys
+import os
+from pathlib import Path
+
+FILE = Path(__file__).resolve()
+ROOT = FILE.parents[0] / 'yolov5'
+if str(ROOT) not in sys.path:
+    sys.path.insert(0, str(ROOT))
+
 import socketio
 import eventlet
 import cv2
