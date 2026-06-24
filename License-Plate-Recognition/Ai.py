@@ -11,7 +11,7 @@ sio = socketio.Server(cors_allowed_origins='*')
 app = socketio.WSGIApp(sio)
 
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
-yolo_LP_detect = torch.hub.load('yolov5', 'custom', path='model/LP_detector_nano_61.pt', source='local').to(device)
+yolo_LP_detect = torch.hub.load('yolov5', 'custom', path='model/best.pt', source='local').to(device)
 yolo_license_plate = torch.hub.load('yolov5', 'custom', path='model/LP_ocr_nano_62.pt', source='local').to(device)
 yolo_license_plate.conf = 0.60
 
