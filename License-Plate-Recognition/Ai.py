@@ -2,10 +2,13 @@ import sys
 import os
 from pathlib import Path
 
+# --- THÊM CHÍNH XÁC CỤM NÀY LÊN ĐẦU FILE AI.PY ---
+# Ép Docker nhận diện thư mục yolov5 để tìm thấy module 'models'
 FILE = Path(__file__).resolve()
 ROOT = FILE.parents[0] / 'yolov5'
 if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
+# ------------------------------------------------
 
 import socketio
 import eventlet
@@ -16,14 +19,16 @@ import torch
 import time
 import function.utils_rotate as utils_rotate
 import function.helper as helper
-import sys
 
+# Khởi tạo Socket.IO
 sio = socketio.Server(cors_allowed_origins='*')
 app = socketio.WSGIApp(sio)
 
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 
+print("--> Đang nạp hệ thống mô hình AI hai giai đoạn (Bóc tách trực tiếp)...")
 
+# Đoạn load model bằng ckpt giữ nguyên như file webcam của bạn
 ckpt_detect = torch.load('model/best.pt', map_location=device, weights_only=False)
 yolo_LP_detect = ckpt_detect['ema' if ckpt_detect.get('ema') else 'model'].float().fuse().eval()
 
