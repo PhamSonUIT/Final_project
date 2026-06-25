@@ -130,10 +130,10 @@ export default function Home() {
 
         <section className={styles.infoSection}>
           <div id="prices" className={styles.infoCard}>
-            <h3 className={styles.cardTitle}>📋 BẢNG GIÁ LƯỢT</h3>
+            <h3 className={styles.cardTitle}>BẢNG GIÁ LƯỢT</h3>
             <ul className={styles.priceList}>
               <li>
-                <strong>Xe máy:</strong> 5.000 VNĐ (4h đầu) - Phát sinh: 2.000
+                <strong>Xe máy:</strong> 3.000 VNĐ (4h đầu) - Phát sinh: 2.000
                 VNĐ/h
               </li>
               <li>
